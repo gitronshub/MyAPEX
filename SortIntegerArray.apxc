@@ -1,0 +1,31 @@
+public class SortIntegerArray
+{ 
+	public static Integer[] sortArray(Integer[] integerArrayList)
+    {
+        // Used as part of a BubbleSort process to check for swapping
+        
+        Boolean integerArraySwapped = false;
+        Integer temporaryIntegerArray;
+        
+        // do ... while
+        
+        do
+        {
+            integerArraySwapped = false;
+            
+            for (Integer integerArrayIndex = 0; integerArrayIndex < (integerArrayList.size() - 1); integerArrayIndex++)
+            {
+                if (integerArrayList[integerArrayIndex] > integerArrayList[integerArrayIndex + 1])
+                {
+                    temporaryIntegerArray = integerArrayList[integerArrayIndex];
+    				integerArrayList[integerArrayIndex] = integerArrayList[integerArrayIndex + 1];
+    				integerArrayList[integerArrayIndex + 1] = temporaryIntegerArray;
+                    integerArraySwapped = true;
+                }
+            }
+            
+        } while (integerArraySwapped == true);
+        
+        return integerArrayList;
+    }
+}

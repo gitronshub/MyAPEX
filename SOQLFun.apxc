@@ -1,0 +1,91 @@
+public without sharing class SOQLFun
+{
+    string bob = 'bob';
+    
+    {
+        bob = 'sue';
+    }
+    
+    //public SOQLFun(){}
+    
+    //public static void SOQLFunList()
+    //{
+	//	List<Contact> contactList = [SELECT ID, Lastname, Firstname FROM Contact WHERE LastName = 'Brown'];
+    //	system.debug(contactList);
+    //}
+    
+    public static List<Account> bigBusiness(string state)
+    {
+        // We will gather a list of accounts that have an annual revenue over $10,000.
+ 		// We will iterate over our query results and and find out how many operate 
+ 		// from the state of CA.
+
+        List<Account> caAccounts = new List<Account>();
+        
+        for (Account a: [SELECT id, name, annualrevenue, billingstate 
+                         FROM Account
+                         ORDER BY annualrevenue])
+        {
+            if (a.annualrevenue > 10000)
+            {
+                a.AnnualRevenue = 1;
+                caAccounts.add(a);
+            }
+        }
+        
+        if (caAccounts.size() == 0)
+        {
+            system.debug('No Entries');
+            Account a = new account();
+            a.AnnualRevenue = 1;
+            a.Name = 'Default';
+            caAccounts.add(a);
+            insert caAccounts;
+        }
+        
+        else
+        {
+            system.debug(caAccounts);
+        	update caAccounts;
+            // insert ->
+            // upsert
+        }
+		
+        upsert caAccounts;
+        return caAccounts;
+    }
+    
+	public static void updateAccountSize()
+    {
+		// We will retrieve a list of all acocunts in order to update them.
+		// Size__c will be a custom field on the Account object.
+		// Size__c field will be a pick list of small/medium/large
+		//  * If an account has between 1-1000 employees then it is classified as small.
+        //  * If an account has between 1001-10000 employees it is classified as medium.
+        //  * If an account has more than 10000 employees it is classified as large.
+        //  We will update the Size__c field on each account to reflect the amount of employees in the Account.
+        
+        List<Account> employeeAccounts = new List<Account>();
+        
+        for (Account a: [SELECT ID, Size__c, NumberOfEmployees FROM Account])
+        {
+            if ((a.NumberOfEmployees >= 1) && (a.NumberOfEmployees <= 1000))
+            {
+                a.Size__c = 'small';
+            }
+            else if ((a.NumberOfEmployees >= 1001) && (a.NumberOfEmployees <= 10000))
+            {
+                a.Size__c = 'medium';
+            }
+            else
+            {
+                a.Size__c = 'large';
+            }
+            
+            employeeAccounts.add(a);
+        }
+        
+        Database.update(employeeAccounts);
+        // update employeeAccounts;        
+	}
+}

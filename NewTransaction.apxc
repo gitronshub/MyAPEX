@@ -1,0 +1,24 @@
+public class NewTransaction
+{
+    // We will create a new account.
+    
+	public static void createAccount()
+    {        
+        // Add new Transaction__c information.
+        
+        Transaction__c transTransaction = new Transaction__c();
+		transTransaction.AccountStatus__c = 'Active';
+        transTransaction.OpenAccount__c = 'Opened Deposit';
+		transTransaction.TransactionType__c = 'Account Transaction';
+        transTransaction.Transaction_Date__c = date.today();
+        transTransaction.TransactionAmount__c = 25;
+        
+        // Display
+        
+        system.debug('Transaction Status: ' + transTransaction.AccountStatus__c);
+        system.debug('Transaction Initiation: ' + transTransaction.OpenAccount__c);
+        system.debug('Transaction Type: ' + transTransaction.TransactionType__c);
+        system.debug('Transaction Date: ' + transTransaction.Transaction_Date__c);
+        system.debug('Transaction Amount: ' + transTransaction.TransactionAmount__c);
+    }
+}

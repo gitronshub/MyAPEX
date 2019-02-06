@@ -1,0 +1,28 @@
+public class UpdateBankBalance
+{
+	// We will update an account's transaction balance.
+	
+  	public static void updateTransactionBalance()
+    {        
+        // Add new Account transaction information.
+        
+        Account acctTransaction = new Account();
+        acctTransaction.Name = 'ZXY Company';
+        acctTransaction.AccountType__c = 'Single Account';
+        acctTransaction.TransactionBalance__c = 50;
+        acctTransaction.TransactionBalance__c = acctTransaction.TransactionBalance__c - 75;
+        
+        if (acctTransaction.TransactionBalance__c < 0)
+        	acctTransaction.AccountFlag__c = 'Overdrawn';
+        else
+        	acctTransaction.AccountFlag__c = 'In Good Standing'; 
+        
+        // Display
+        
+        system.debug('Name: ' + acctTransaction.Name);
+        system.debug('Account Type: ' + acctTransaction.AccountType__c);
+        system.debug('Transaction Balance: ' + acctTransaction.TransactionBalance__c);
+        system.debug('Account Status: ' + acctTransaction.AccountFlag__c);
+        system.debug('Date of Transaction: ' + date.today());
+    }  
+}

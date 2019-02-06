@@ -1,0 +1,31 @@
+public class CheckBankBalance
+{
+    // We will check 'AccountBalance__c' to see if it is overdrawn.
+    // If so, we will go into 'Transaction__c' and update the 
+    // 'AccountFlag__c' field accordingly.
+    
+	public static void flagAccount()
+    {
+        // Create an Account list.
+        
+        List<Account> acctAccount = [SELECT Name, AccountType__c, AccountBalance__c, AccountFlag__c FROM Account];
+        
+        // Let's iterate through the records until we find what we are looking for.
+        
+        for (Account acctIndex:acctAccount)
+        {
+            if ((acctIndex.AccountType__c != Null) && (acctIndex.AccountType__c !=''))
+            {
+            	if (acctIndex.AccountBalance__c < 0)
+                	acctIndex.AccountFlag__c = 'Overdrawn';
+            	else
+                	acctIndex.AccountFlag__c = 'In Good Standing';
+                
+            	system.debug('Account Name: ' + acctIndex.Name);
+        		system.debug('Account Type: ' + acctIndex.AccountType__c);
+        		system.debug('Account Balance: ' + acctIndex.AccountBalance__c);
+        		system.debug('Account Flag: ' + acctIndex.AccountFlag__c);
+            }
+        }
+    }
+}

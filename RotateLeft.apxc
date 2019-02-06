@@ -1,0 +1,33 @@
+public class RotateLeft
+{
+	// Given two arrays and one integer, n, rotate the values in array left n times and return array.
+	// Test Cases:
+	// Input: [1,2,3,4,5], 1	Output: [2,3,4,5,1]
+	// Input: [1,2,3,4,5], 6	Output: [2,3,4,5,1]
+	// Input: [1,2,3,4,5], 3	Output: [4,5,1,2,3]
+	
+    public static Integer[] rotateToTheLeft(Integer[] integerArrayList, Integer arraySize)
+    {
+        // Use a temporaryValue to hold one element in the array in order to help perform swaps
+        
+        Integer arrayIndex = 0, temporaryValue = 0; 
+        temporaryValue = integerArrayList[0];
+        
+        for (arrayIndex = 0; arrayIndex < integerArrayList.size() - 1; arrayIndex++) 
+            integerArrayList[arrayIndex] = integerArrayList[arrayIndex + 1];
+        
+        integerArrayList[arrayIndex] = temporaryValue;
+        return integerArrayList;
+    }
+    
+    public static Integer[] rotateLeftNTimes(Integer[] integerArrayList, Integer numberOfRotations)
+    {
+        // Set up a for ... loop in order to traverse by the number of rotations given to calling
+        // the method rotateToTheLeft in order to perform swaps of array values.
+        
+		for (Integer arrayIndex = 0; arrayIndex < numberOfRotations; arrayIndex++) 
+            rotateToTheLeft(integerArrayList, integerArrayList.size());
+        
+        return integerArrayList;
+    } 
+} 

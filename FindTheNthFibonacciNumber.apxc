@@ -1,0 +1,41 @@
+public class FindTheNthFibonacciNumber
+{
+    // This method returns the 'nTH' Fibonacci of any number you input.
+    // This method does not use recursion.
+	
+    public static Integer getFibonacci(Integer passedNumber)
+    {
+        // If 'nTH' number is less than or equal to 1, return just that input value passed through.
+        // Otherwise, if any 'nTH' number is greater than 1, calculate and return the Fibonacci
+        // number for that input value passed through.
+        
+        if (passedNumber <= 0)
+            return 0;
+        
+        if (passedNumber == 1)
+            return 1;
+        
+        Integer firstNumber = 0;
+        Integer secondNumber = 1;
+        Integer nTH = 1;
+
+        for (Integer fibonacciIndex = 2; fibonacciIndex <= passedNumber; fibonacciIndex++) 
+        {
+            nTH = firstNumber + secondNumber;
+            firstNumber = secondNumber;
+            secondNumber = nTH;
+        }
+        
+        return nTH;
+    }
+		
+    public static Integer nFibonacci(Integer inputNumber)
+    {
+        for (Integer fibonacciIndex = 0; fibonacciIndex <= inputNumber; fibonacciIndex++)
+        {
+            getFibonacci(fibonacciIndex);
+        }
+        
+        return inputNumber;
+    }
+}

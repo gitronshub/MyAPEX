@@ -1,0 +1,27 @@
+public class CaliforniaBusiness
+{
+    // We will be using a SOQL query to find all Leads where the state contains 'CA'. If a lead is located 
+    // in California(CA), change their Lead Status field to 'Closed - Not Converted' and their description 
+    // should display the message, 'We are no longer doing business in California'.
+    
+	public static void updateCALeads()
+    {
+        // Create a Lead list
+        
+        List<Lead> leadIndex = new List<Lead>();
+        
+        // Let's iterate through the records until we find what we are looking for
+        
+        for (Lead ldIndex: [SELECT ID, Name, State, Status, Description 
+                            FROM Lead])
+        {
+            if (ldIndex.State == 'CA')
+            {
+                ldIndex.Status = 'Closed - Not Converted';
+                ldIndex.Description = 'We are no longer doing business in California';
+                system.debug('Status = ' + ldIndex.Status);
+                system.debug('Status = ' + ldIndex.Description);
+            }
+        }
+    }
+}

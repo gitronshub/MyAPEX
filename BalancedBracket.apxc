@@ -1,0 +1,77 @@
+public class BalancedBracket
+{
+    // A bracket is any one of the following: (, ), {, }, [, or ]
+    // 
+    // The following are balanced brackets:
+    //
+    //    ( )
+    //    ( ) ( )
+    //    ( ( ) )
+    //    ( { [ ] } )
+    //
+    // The following are NOT balanced brackets:
+    //   (
+    //   )
+    //   ( ( )
+    //   ( [ ) ]
+    //
+    // Return true if balanced
+    // Return false if not balanced 
+    
+    // The start of our program
+    
+	public static Boolean bracketsAreBalanced(String inputString)
+    {
+        // First, let's convert our inputString into a 'characterArray' list.
+        // Second, let's create a second string list called 'arrayOfCharacters'.
+        // We will check to see if the brackets in 'arrayOfCharacters' close. 
+        // If they close, the two closing brackets are removed from list 'arrayOfCharacters'.
+        
+        String[] characterArray = inputString.split('');
+        List<String> arrayOfCharacters = new List<String>();
+        
+        // This loops through characterArray, its entire size, adding each element into arrayOfCharacters
+        
+        for(Integer x = 0; x < characterArray.size(); x++)
+        {
+            // We will add element x inside characterArray to list arrayOfCharacters
+             
+            arrayOfCharacters.add(characterArray[x]);
+            
+            // We check if arrayOfCharacters has more than one element so we can compare if any brackets are closed, 
+            // and remove them from the list.
+            
+            if(arrayOfCharacters.size() > 1)
+            {
+                // We check if the last element is closed with second to last with {} () or [].
+                
+                if ((arrayOfCharacters[arrayOfCharacters.size() - 1].equals('}') &&  arrayOfCharacters[arrayOfCharacters.size() - 2].equals('{')) ||
+                    (arrayOfCharacters[arrayOfCharacters.size() - 1].equals(')') &&  arrayOfCharacters[arrayOfCharacters.size() - 2].equals('(')) ||
+                    (arrayOfCharacters[arrayOfCharacters.size() - 1].equals(']') &&  arrayOfCharacters[arrayOfCharacters.size() - 2].equals('[')))
+                {
+                 	// We remove those last two elements if they close with each other.
+                 	
+                    arrayOfCharacters.remove(arrayOfCharacters.size() - 1);
+                    arrayOfCharacters.remove(arrayOfCharacters.size() - 1);
+            	} 
+        	}
+        }
+        
+        // If all brackets in arrayOfCharacters were checked and closed, then all of them should have been removed 
+        // from arrayOfCharacters, thus makiing it empty. In that case, we will check if arrayOfCharacters is empty 
+        // and return true, exiting the method.
+    
+        if (arrayOfCharacters.isEmpty())
+        {
+            system.debug('Balanced');
+        	return true;
+    	}
+        
+        // We are at the default case. It checked and found arrayOfCharacters was not empty.
+        // This meant there was some bracket that didn't close with any still left inside.
+        // For example, it might look something like {'['}.
+        
+        system.debug('Not Balanced');
+        return false;
+    }
+}

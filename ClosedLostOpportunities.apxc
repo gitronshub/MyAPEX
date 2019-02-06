@@ -1,0 +1,26 @@
+public class ClosedLostOpportunities
+{
+    // We will be using a SOQL query to find all Opportunities which have already passed their Close Date
+    // and have a Stage field that is not 'Closed Won'. If they have passed their Close Date and they are 
+    // not marked as 'Closed Won', they will be set as 'Closed Lost'.
+    
+	public static void closePastDueOpportunities()
+    {
+        // Create an Opportunity list
+        
+        List<Opportunity> caAccounts = new List<Opportunity>();
+        
+        // Let's iterate through the records until we find what we are looking for
+        
+        for (Opportunity oppIndex: [SELECT Name, CloseDate, StageName 
+                                    FROM Opportunity])
+        {
+            if ((oppIndex.CloseDate < date.today()) && (oppIndex.StageName != 'Closed Won'))
+            {
+                system.debug('Name = ' + oppIndex.Name);
+                oppIndex.StageName = 'Closed Lost';
+                system.debug('StageName = ' + oppIndex.StageName);
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+public class FindFactorialOfN
+{
+    // Mathematically, the factorial of numberFactorial can be calculated
+    // using the following formula:
+    // 
+    // n! = n * (n-1)!
+    // n! = 1 if n = 0 or n = 1
+    // 
+    // We will calculate this iteratively as recursion can be costly for
+    // large numbers. 
+    
+	public static Integer nFactorial(Integer numberFactorial)
+    {
+    	// Solving factorial of numberFactorial iteratively
+    	
+        Integer iteratorOfNFactorial, resultOfNFactorial = 1;
+            
+        For (iteratorOfNFactorial = 2; iteratorOfNFactorial <= numberFactorial; iteratorOfNFactorial++)
+        	resultOfNFactorial *= iteratorOfNFactorial;
+        
+        return resultOfNFactorial; 
+    }
+}

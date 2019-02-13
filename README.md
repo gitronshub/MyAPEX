@@ -1,7 +1,7 @@
 # MyAPEX
 ...for my APEX programs ...
 // Profile Link for Security Superbadge
-// https://brave-fox-sahkaj-dev-ed.lightning.force.com
+// https://trailhead.salesforce.com/en/me/0052J000008afz3QAA
 //
 // Please acknowledge receipt.
 // Please address me if issues linking to my profile link.
